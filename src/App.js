@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from "./components/Home";
+import data from "./data.json";
 
 import Template from "./components/Template";
 
@@ -20,7 +21,21 @@ function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <Routes>
-        <Route path="/" element={<Template page={<Home />}></Template>} />
+        <Route
+          path="/"
+          element={
+            <Template
+              mail="batchumanish@gmail.com"
+              page={
+                <Home
+                  name={data?.name}
+                  desc={data?.desc}
+                  briefdesc={data?.briefdesc}
+                />
+              }
+            ></Template>
+          }
+        />
       </Routes>
     </ThemeProvider>
   );

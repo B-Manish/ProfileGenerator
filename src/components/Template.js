@@ -14,8 +14,9 @@ import Threed from "./Threed";
 import OtherProjects from "./OtherProjects";
 import Preloader from "./Preloader";
 import Worked from "./Worked";
+import data from "../../src/data.json";
 
-function Template({ page }) {
+function Template({ page, mail }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBM, setShowBM] = useState(false); // State to control 'BM' visibility
 
@@ -110,7 +111,7 @@ function Template({ page }) {
               }}
               className="roboto"
             >
-              <Box> bmanish7777@gmail.com</Box>
+              <Box>{mail}</Box>
             </Box>
             <Box
               sx={{
@@ -126,10 +127,10 @@ function Template({ page }) {
           </>
         )}
       </Grid>
-      <Aboutme setAboutRef={setAboutRef} />
+      <Aboutme setAboutRef={setAboutRef} data={data?.aboutme} />
       <Worked setExpRef={setExpRef} />
-      <Built setBuiltRef={setBuiltRef} />
-      <OtherProjects />
+      <Built setBuiltRef={setBuiltRef} data={data?.built} />
+      <OtherProjects data={data?.projects} />
       <Getintouch setContactRef={setContactRef} />
       {/* <Threed /> */}
     </Grid>

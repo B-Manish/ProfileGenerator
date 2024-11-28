@@ -11,7 +11,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Aboutme({ setAboutRef }) {
+function Aboutme({ setAboutRef, data }) {
   const mainRef = useRef(null);
   const containerRef = useRef(null);
   const isMdScreen = useMediaQuery("(max-width:899px)");
@@ -107,71 +107,66 @@ function Aboutme({ setAboutRef }) {
             }}
           >
             <Box sx={{ maxWidth: "511px" }}>
-              <Box
-                className="customdmsans"
-                sx={{ fontWeight: "300", color: "#8892b0", mb: "10px" }}
-              >
-                Hello! My name is Manish, and I'm a frontend developer that
-                enjoys backend development and building code that requires
-                logical issue solving.
-              </Box>
-              <Box
-                className="customdmsans"
-                sx={{ fontWeight: "300", color: "#8892b0", mb: "10px" }}
-              >
-                While I enjoy creating smooth, user-friendly interfaces, I am
-                most motivated by the difficulties of developing scalable,
-                efficient backend solutions. I enjoy solving challenging coding
-                issues and bridging the gap between the frontend and backend to
-                develop unified, high-performance apps.
-              </Box>
-              <Box
-                className="customdmsans"
-                sx={{ fontWeight: "300", color: "#8892b0", mb: "10px" }}
-              >
-                Here are a few technologies I’ve been working with recently:
-              </Box>
-              <Grid container>
-                {[
-                  "React js",
-                  "Cypress",
-                  "AWS",
-                  "Node.js",
-                  "Python(LLMs)",
-                  "Three.js",
-                ]?.map((item) => {
-                  return (
-                    <Grid item xs={6} sx={{ pb: "5px", maxWidth: "200px" }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <PlayArrowIcon
-                          style={{
-                            color: "#64FFDA",
-                            fontSize: "12px",
-                            marginRight: "7px",
-                          }}
-                        />
-                        <Box
-                          sx={{
-                            color: "#8892b0",
-                            display: "flex",
-                            alignItems: "center",
-                            fontFamily: '"Roboto Mono", monospace',
-                            fontSize: "13px",
-                            fontWeight: "400",
-                          }}
-                        >
-                          {item}
-                        </Box>
-                      </Box>
+              {data?.aboutmedesc.map((item) => {
+                return (
+                  <Box
+                    className="customdmsans"
+                    sx={{ fontWeight: "300", color: "#8892b0", mb: "10px" }}
+                  >
+                    {item}
+                  </Box>
+                );
+              })}
+              {data?.recenttechnologies &&
+                data?.recenttechnologies?.length !== 0 && (
+                  <>
+                    <Box
+                      className="customdmsans"
+                      sx={{ fontWeight: "300", color: "#8892b0", mb: "10px" }}
+                    >
+                      Here are a few technologies I’ve been working with
+                      recently:
+                    </Box>
+                    <Grid container>
+                      {data?.recenttechnologies?.map((item) => {
+                        return (
+                          <Grid
+                            item
+                            xs={6}
+                            sx={{ pb: "5px", maxWidth: "200px" }}
+                          >
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <PlayArrowIcon
+                                style={{
+                                  color: "#64FFDA",
+                                  fontSize: "12px",
+                                  marginRight: "7px",
+                                }}
+                              />
+                              <Box
+                                sx={{
+                                  color: "#8892b0",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  fontFamily: '"Roboto Mono", monospace',
+                                  fontSize: "13px",
+                                  fontWeight: "400",
+                                }}
+                              >
+                                {item}
+                              </Box>
+                            </Box>
+                          </Grid>
+                        );
+                      })}
                     </Grid>
-                  );
-                })}
-              </Grid>
+                  </>
+                )}
             </Box>
             <Box
               sx={{

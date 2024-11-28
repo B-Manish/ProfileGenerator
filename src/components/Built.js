@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mui/material";
 import Builtcard from "./Builtcard";
 import Ecomm from "../static/ecomm.png";
 
-function Built({ setBuiltRef }) {
+function Built({ setBuiltRef, data }) {
   const mainRef = useRef(null);
   const [fontSize, setFontSize] = useState(32);
   const isSxScreen = useMediaQuery("(max-width:599px)");
@@ -88,8 +88,18 @@ function Built({ setBuiltRef }) {
             </Box>
             <CustomDivider />
           </Box>
-          <Builtcard margin="0 0 100px 0" iphone />
-          <Builtcard margin="0 0 100px 0" />
+          {data?.map((item, index) => {
+            return (
+              <Builtcard
+                margin="0 0 100px 0"
+                iphone
+                data={item}
+                reverse={index % 2 == 0 ? false : true}
+              />
+            );
+          })}
+          {/* <Builtcard margin="0 0 100px 0" iphone data />
+          <Builtcard margin="0 0 100px 0" /> */}
           {/* <Builtcard
             reverse
             margin="0 0 100px 0"

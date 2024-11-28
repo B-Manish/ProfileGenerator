@@ -6,16 +6,18 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import Vscode from "../static/vscode.png";
 import Threed from "./Threed";
 
-function Builtcard({
-  reverse = false,
-  margin,
-  iphone,
-  technologies = ["React", "Express", "Spotify API", "Styled Components"],
-  heading = " Haylon theme",
-  description = "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-  img = Vscode,
-}) {
+function Builtcard({ reverse = false, margin, iphone, img = Vscode, data }) {
   const isMdScreen = useMediaQuery("(max-width:899px)");
+
+  const customIcon = (technology, color = "white") => {
+    if (technology === "Github") {
+      return <GitHubIcon style={{ color: color }} />;
+    }
+  };
+
+  useEffect(() => {
+    console.log("data", data);
+  }, []);
 
   return isMdScreen ? (
     <Box
@@ -67,7 +69,7 @@ function Builtcard({
           whiteSpace: "nowrap",
         }}
       >
-        {heading}
+        {data?.name}
       </Box>
       <Box
         className="customdmsans"
@@ -77,7 +79,7 @@ function Builtcard({
           color: "#8892b0",
         }}
       >
-        {description}
+        {data?.desc}
       </Box>
     </Box>
   ) : (
@@ -131,7 +133,7 @@ function Builtcard({
             whiteSpace: "nowrap",
           }}
         >
-          {heading}
+          {data?.name}
         </Box>
         <Box
           className="customdmsans"
@@ -143,7 +145,7 @@ function Builtcard({
             color: "#8892b0",
           }}
         >
-          {description}
+          {data?.desc}
         </Box>
         <Box
           sx={{
@@ -152,12 +154,13 @@ function Builtcard({
           }}
         >
           <Box sx={{ display: "flex", mb: "10px" }}>
-            {technologies.map((technology, index) => (
+            {data?.technologies.map((technology, index) => (
               <Box
                 key={technology}
                 className="roboto"
                 sx={{
-                  marginRight: index !== technologies.length - 1 && "20px",
+                  marginRight:
+                    index !== data?.technologies.length - 1 && "20px",
                   fontSize: "13px",
                 }}
               >
@@ -173,8 +176,18 @@ function Builtcard({
           }}
         >
           <Box sx={{ display: "flex" }}>
-            <GitHubIcon style={{ marginRight: "20px", color: "white" }} />
-            <GitHubIcon style={{ color: "white" }} />
+            {data?.references.map((item, index) => {
+              return (
+                <Box
+                  sx={{
+                    marginRight:
+                      index !== data?.references.length - 1 && "20px",
+                  }}
+                >
+                  {customIcon(item?.ref)}
+                </Box>
+              );
+            })}
           </Box>
         </Box>
       </Box>

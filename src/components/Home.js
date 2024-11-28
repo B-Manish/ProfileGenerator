@@ -4,7 +4,7 @@ import "../App.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-function Home() {
+function Home({ name, desc, briefdesc }) {
   useGSAP(() => {
     gsap.fromTo(
       ".gg",
@@ -41,7 +41,7 @@ function Home() {
             },
           }}
         >
-          Manish Batchu
+          {name}
         </Box>
         <Box
           className="gg"
@@ -57,7 +57,7 @@ function Home() {
             },
           }}
         >
-          I build things for the web
+          {desc}
         </Box>
         <Box
           className="gg"
@@ -67,9 +67,7 @@ function Home() {
             color: "#CBCBD7",
           }}
         >
-          I’m a software engineer specializing in building (and occasionally
-          designing) exceptional digital experiences. Currently, I’m focused on
-          building accessible, human-centered products at Upstatement.
+          {briefdesc}
         </Box>
       </Box>
     </Box>

@@ -9,7 +9,7 @@ import { Height } from "@mui/icons-material";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function OtherProjects() {
+function OtherProjects({ data }) {
   const gridItemRefs = useRef([]);
   const isSxScreen = useMediaQuery("(max-width:599px)");
 
@@ -79,7 +79,7 @@ function OtherProjects() {
           </Box>
 
           <Grid container>
-            {otherprojects?.map((project, index) => {
+            {data?.map((project, index) => {
               return (
                 <Grid
                   item
@@ -98,9 +98,9 @@ function OtherProjects() {
                   onMouseLeave={() => handleMouseLeave(index)}
                 >
                   <OtherProjectsCard
-                    heading={project.heading}
-                    description={project.description}
-                    skills={project.skills}
+                    heading={project.name}
+                    description={project.desc}
+                    skills={project.technologies}
                   />
                 </Grid>
               );
