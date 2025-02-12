@@ -1,5 +1,5 @@
 ### Steps to run
-1. Go the root of the project
+Go the root of the project and run the following commands
  ``` bash
  npm install
  ```
