@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 import os
 import zipfile
 import requests
@@ -9,27 +9,25 @@ NETLIFY_PAT_TOKEN = "nfp_t95FeMGT3C4qimVZDupyqs2jUuMjemMp207a"
 NETLIFY_API = "https://api.netlify.com/api/v1"
 AUTH_HEADER = {"Authorization": f"Bearer {NETLIFY_PAT_TOKEN}"}
 
-BUILD_FOLDER_PATH = r'C:\Users\manish.batchu\Desktop\ProfileGenerator\build'
 
-
-def zip_build_folder():
-    if not os.path.exists(BUILD_FOLDER_PATH):
+def zip_build_folder(build_folder_path: str):
+    if not os.path.exists(build_folder_path):
         raise HTTPException(status_code=404, detail="Build folder not found.")
 
     print("📦 Zipping build folder...")
-    zip_path = os.path.join(os.path.dirname(BUILD_FOLDER_PATH), "build.zip")
+    zip_path = os.path.join(os.path.dirname(build_folder_path), "build.zip")
     with zipfile.ZipFile(zip_path, 'w') as zipf:
-        for root, dirs, files in os.walk(BUILD_FOLDER_PATH):
+        for root, dirs, files in os.walk(build_folder_path):
             for file in files:
                 zipf.write(os.path.join(root, file),
-                           os.path.relpath(os.path.join(root, file), BUILD_FOLDER_PATH))
+                           os.path.relpath(os.path.join(root, file), build_folder_path))
     return zip_path
 
 
 @app.get("/deploy")
-async def deploy_to_netlify():
+async def deploy_to_netlify(build_folder_path: str = Query(..., description="Path to the build folder")):
     try:
-        zip_path = zip_build_folder()
+        zip_path = zip_build_folder(build_folder_path)
         print(f"✅ Build folder zipped at: {zip_path}")
         print("🚀 Creating a new Netlify site...")
 
