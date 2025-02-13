@@ -60,6 +60,12 @@ app.get("/deploy", async (req, res) => {
     }
 });
 
+app.get("/", async (req, res) => {
+
+    
+    res.status(500).json({ message: "gg" });
+});
+
 // 🌍 Start Express Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
