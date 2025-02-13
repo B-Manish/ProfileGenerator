@@ -4,8 +4,12 @@ const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 const AdmZip = require("adm-zip");
+const cors = require("cors");
+
+
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 const NETLIFY_API = "https://api.netlify.com/api/v1";
@@ -63,7 +67,7 @@ app.get("/deploy", async (req, res) => {
 app.get("/", async (req, res) => {
 
     
-    res.status(500).json({ message: "gg" });
+    res.status(200).json({ message: "gg" });
 });
 
 // 🌍 Start Express Server
