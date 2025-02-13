@@ -9,10 +9,9 @@ NETLIFY_PAT_TOKEN = "nfp_t95FeMGT3C4qimVZDupyqs2jUuMjemMp207a"
 NETLIFY_API = "https://api.netlify.com/api/v1"
 AUTH_HEADER = {"Authorization": f"Bearer {NETLIFY_PAT_TOKEN}"}
 
-# 🚀 Absolute Path to the Build Folder (Hard-coded)
 BUILD_FOLDER_PATH = r'C:\Users\manish.batchu\Desktop\ProfileGenerator\build'
 
-# 🚀 1. Zip the Build Folder
+
 def zip_build_folder():
     if not os.path.exists(BUILD_FOLDER_PATH):
         raise HTTPException(status_code=404, detail="Build folder not found.")
@@ -32,16 +31,15 @@ async def deploy_to_netlify():
     try:
         zip_path = zip_build_folder()
         print(f"✅ Build folder zipped at: {zip_path}")
-        # return {"detail": f"Deployment successful! Build zipped at: {zip_path}"}
-
         print("🚀 Creating a new Netlify site...")
+
         site_response = requests.post(f"{NETLIFY_API}/sites", headers=AUTH_HEADER)
         site_response.raise_for_status() 
         site = site_response.json()
         
         print(f"✅ Site created: {site['url']}")
-        
         print("🔼 Uploading build.zip...")
+
         with open(zip_path, "rb") as zip_file:
             headers = {
                 **AUTH_HEADER,
@@ -52,7 +50,7 @@ async def deploy_to_netlify():
                 headers=headers, 
                 data=zip_file
             )
-            deploy_response.raise_for_status()  # Check if request was successful
+            deploy_response.raise_for_status()  
             deploy = deploy_response.json()
         
         return {"message": "Deployment successful!", "url": site["url"]}
