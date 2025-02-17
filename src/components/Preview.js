@@ -29,12 +29,13 @@ const scope = { React };
         <ThemeProvider theme={customTheme}>
             <Template
             preview={true}
-                mail="batchumanish@gmail.com"
+                mail={data?.mail}
                 page={
                     <Home
                         name={data?.name}
                         desc={data?.desc}
                         briefdesc={data?.briefdesc}
+                        preview={true}
                     />
                 }
             />

@@ -16,7 +16,7 @@ import Preloader from "./Preloader";
 import Worked from "./Worked";
 import data from "../../src/data.json";
 
-function Template({ page, mail }) {
+function Template({ page, mail,preview=false }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBM, setShowBM] = useState(false); // State to control 'BM' visibility
 
@@ -27,7 +27,7 @@ function Template({ page, mail }) {
   const isMdScreen = useMediaQuery("(max-width:899px)");
   const isSxScreen = useMediaQuery("(max-width:599px)");
 
-  return !isLoaded ? (
+  return (!isLoaded && !preview) ? (
     <Preloader
       showBM={showBM}
       setShowBM={setShowBM}
@@ -46,10 +46,11 @@ function Template({ page, mail }) {
         builtRef={builtRef}
         contactRef={contactRef}
         expRef={expRef}
+        preview={preview}
       />
 
       <Grid item xs={1}>
-        {!isMdScreen && (
+        {!isMdScreen && !preview &&(
           <>
             <Box
               sx={{
@@ -97,7 +98,7 @@ function Template({ page, mail }) {
         </Box>
       </Grid>
       <Grid item xs={1}>
-        {!isMdScreen && (
+        {!isMdScreen && !preview &&(
           <>
             <Box
               sx={{
@@ -129,8 +130,8 @@ function Template({ page, mail }) {
       </Grid>
       <Aboutme setAboutRef={setAboutRef} data={data?.aboutme} />
       <Worked setExpRef={setExpRef} />
-      <Built setBuiltRef={setBuiltRef} data={data?.built} />
-      <OtherProjects data={data?.projects} />
+      <Built setBuiltRef={setBuiltRef} data={data?.built} preview={preview}/>
+      <OtherProjects data={data?.projects} preview={preview}/>
       <Getintouch setContactRef={setContactRef} />
       {/* <Threed /> */}
     </Grid>

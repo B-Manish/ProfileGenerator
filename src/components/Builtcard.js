@@ -6,7 +6,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import Vscode from "../static/vscode.png";
 import Threed from "./Threed";
 
-function Builtcard({ reverse = false, margin, iphone, img = Vscode, data }) {
+function Builtcard({ reverse = false, margin, iphone, img = Vscode, data ,preview}) {
   const isMdScreen = useMediaQuery("(max-width:899px)");
 
   const customIcon = (technology, color = "white") => {
@@ -98,7 +98,7 @@ function Builtcard({ reverse = false, margin, iphone, img = Vscode, data }) {
           justifyContent: reverse === true && "right",
         }}
       >
-        {iphone ? <Threed /> : <img src={img} style={{ width: "120%" }} />}
+        {iphone && !preview ? <Threed /> : <img src={img} style={{ width: "120%" }} />}
       </Box>
       <Box
         sx={{

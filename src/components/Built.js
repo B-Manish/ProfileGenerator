@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mui/material";
 import Builtcard from "./Builtcard";
 import Ecomm from "../static/ecomm.png";
 
-function Built({ setBuiltRef, data }) {
+function Built({ setBuiltRef, data ,preview}) {
   const mainRef = useRef(null);
   const [fontSize, setFontSize] = useState(32);
   const isSxScreen = useMediaQuery("(max-width:599px)");
@@ -95,6 +95,7 @@ function Built({ setBuiltRef, data }) {
                 iphone
                 data={item}
                 reverse={index % 2 == 0 ? false : true}
+                preview={preview}
               />
             );
           })}

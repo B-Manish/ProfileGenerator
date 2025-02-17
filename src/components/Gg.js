@@ -14,8 +14,8 @@ function Gg() {
                 background: "#0A192F",
             }}
         > 
-         <Grid item xs={5}></Grid>
-         <Grid item xs={7} sx={{ display: 'grid', placeItems: 'center' }}>
+         <Grid item xs={4.5}></Grid>
+         <Grid item xs={7.5} sx={{ display: 'grid', placeItems: 'center' }}>
             <Box 
              sx={{
              width: '90%',
