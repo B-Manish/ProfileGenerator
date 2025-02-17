@@ -13,17 +13,23 @@ function Gg() {
                 height: "100vh",
                 background: "#0A192F",
             }}
-        > <Grid item xs={5} ></Grid><Grid item xs={7} sx={{display:'grid',placeItems:'center'}}><Box sx={{
-            width: '90%',        
-            aspectRatio: '16 / 9', 
-            bgcolor: 'lightblue', 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflowY: 'scroll',
-            overflowX: 'hidden',
+        > 
+         <Grid item xs={5}></Grid>
+         <Grid item xs={7} sx={{ display: 'grid', placeItems: 'center' }}>
+            <Box 
+             sx={{
+             width: '90%',
+             aspectRatio: '16 / 9',
+             border:'1px solid white',
+             display: 'flex',
+            //   alignItems: 'center',
+             justifyContent: 'center',
+             overflowY: 'scroll',
+             overflowX: 'hidden',
 
-        }}></Box></Grid></Grid>
+            }}><Viewpreview/></Box>
+         </Grid>
+        </Grid>
     );
 }
 

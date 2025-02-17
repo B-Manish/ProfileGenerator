@@ -9,7 +9,7 @@ import CustomModal from "./CustomModal";
 import CustomDivider from "./Divider";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Navbar({ aboutRef, builtRef, contactRef, expRef }) {
+function Navbar({ aboutRef, builtRef, contactRef, expRef,preview=false }) {
   const navbaritems = ["About", "Experience", "Work", "Contact"];
   const [openModal, setOpenModal] = useState(false);
   const isSxScreen = useMediaQuery("(max-width:599px)");
@@ -103,7 +103,7 @@ function Navbar({ aboutRef, builtRef, contactRef, expRef }) {
         justifyContent: "space-between",
         height: "85px",
         alignItems: "center",
-        position: "fixed",
+        position: preview==false && "fixed" ,
         fontFamily: '"Roboto Mono", monospace',
         backdropFilter: " blur(50px)",
         boxShadow: !isAtTop && "0 4px 20px rgba(0, 0, 0, 0.3)",

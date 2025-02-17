@@ -9,7 +9,7 @@ import { Height } from "@mui/icons-material";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function OtherProjects({ data }) {
+function OtherProjects({ data,preview=false }) {
   const gridItemRefs = useRef([]);
   const isSxScreen = useMediaQuery("(max-width:599px)");
 
@@ -83,9 +83,9 @@ function OtherProjects({ data }) {
               return (
                 <Grid
                   item
-                  xs={12}
-                  md={6}
-                  lg={4}
+                  xs={preview ? 6 : 12} 
+                  md={6} 
+                  lg={preview ? 6 : 4} 
                   sx={{
                     padding: isSxScreen ? "0 0 10px 0" : "8px",
                     cursor: "pointer",

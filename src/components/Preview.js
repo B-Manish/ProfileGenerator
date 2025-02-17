@@ -28,6 +28,7 @@ const scope = { React };
     return (
         <ThemeProvider theme={customTheme}>
             <Template
+            preview={true}
                 mail="batchumanish@gmail.com"
                 page={
                     <Home
