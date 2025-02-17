@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:preview": "cross-env REACT_APP_BUILD_FOR_PREVIEW=true npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

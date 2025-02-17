@@ -1,6 +1,10 @@
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Gg from "./components/Gg";
+import Template from "./components/Template";
+import Home from "./components/Home";
+import { DataContext } from "./contexts/DataContext";
 
 const customTheme = createTheme({
   breakpoints: {
@@ -14,19 +18,43 @@ const customTheme = createTheme({
   },
 });
 
+
 function App() {
-  return (
-    <ThemeProvider theme={customTheme}>
+  const { data } = useContext(DataContext);
+  if (process.env.REACT_APP_BUILD_FOR_PREVIEW === 'false') {
+    return <ThemeProvider theme={customTheme}>
       <Routes>
         <Route
           path="/"
           element={
-             <Gg/>
+            <Template
+              preview={false}
+              mail={data?.mail}
+              page={
+                <Home
+                  name={data?.name}
+                  desc={data?.desc}
+                  briefdesc={data?.briefdesc}
+                  preview={true}
+                />
+              }
+            />
           }
         />
       </Routes>
-    </ThemeProvider>
-  );
+    </ThemeProvider>;
+  }
+  return <ThemeProvider theme={customTheme}>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Gg />
+        }
+      />
+
+    </Routes>
+  </ThemeProvider>;
 }
 
 export default App;
