@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid } from "@mui/material";
 import Viewpreview from './Viewpreview';
+import Dataform from './Dataform';
 
 
 function Gg() {
@@ -14,7 +15,7 @@ function Gg() {
                 background: "#0A192F",
             }}
         > 
-         <Grid item xs={4.5}></Grid>
+         <Grid item xs={4.5}><Dataform/></Grid>
          <Grid item xs={7.5} sx={{ display: 'grid', placeItems: 'center' }}>
             <Box 
              sx={{
