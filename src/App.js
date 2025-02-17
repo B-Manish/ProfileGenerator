@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from "./components/Home";
 import data from "./data.json";
+import Viewpreview from "./components/Viewpreview";
+import Gg from "./components/Gg";
 
 import Template from "./components/Template";
 
@@ -24,16 +26,13 @@ function App() {
         <Route
           path="/"
           element={
-            <Template
-              mail="batchumanish@gmail.com"
-              page={
-                <Home
-                  name={data?.name}
-                  desc={data?.desc}
-                  briefdesc={data?.briefdesc}
-                />
-              }
-            ></Template>
+             <Gg/>
+          }
+        />
+        <Route
+          path="/preview"
+          element={
+            <Viewpreview/>
           }
         />
       </Routes>
