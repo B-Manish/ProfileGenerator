@@ -14,9 +14,11 @@ import Threed from "./Threed";
 import OtherProjects from "./OtherProjects";
 import Preloader from "./Preloader";
 import Worked from "./Worked";
-import data from "../../src/data.json";
+import { DataContext } from "../contexts/DataContext";
+
 
 function Template({ page, mail,preview=false }) {
+  const { data } = React.useContext(DataContext);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBM, setShowBM] = useState(false); // State to control 'BM' visibility
 

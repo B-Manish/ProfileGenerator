@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import React from 'react';
+import React, { useContext } from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from "../components/Home";
-import data from "../data.json";
+import { DataContext } from "../contexts/DataContext";
 
 import Template from "../components/Template";
 
@@ -22,7 +22,7 @@ const customTheme = createTheme({
 });
 
 function Preview() {
-  
+  const {data}=useContext(DataContext);
 
 const scope = { React };
     return (
