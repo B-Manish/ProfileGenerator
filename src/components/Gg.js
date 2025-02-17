@@ -16,7 +16,7 @@ function Gg() {
             }}
         > 
          <Grid item xs={4.5}><Dataform/></Grid>
-         <Grid item xs={7.5} sx={{ display: 'grid', placeItems: 'center' }}>
+         <Grid item xs={7.5} >
             <Box 
              sx={{
              width: '90%',
