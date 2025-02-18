@@ -5,49 +5,55 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 function Dataform() {
     const { data, setData } = useContext(DataContext);
 
-
-    const handleChange = (event, index = null, field = null, subIndex = null) => {
+    // Reusable handleChange function
+    const handleChange = (event, index,item) => {
         const { name, value } = event.target;
-    
+        // setData((prev) => ({
+        //     ...prev,
+        //     [name]: value,
+        // }));
+
         setData((prev) => {
-            let updatedData = { ...prev };
-    
-            if (field && subIndex !== null) {
-                // If we are updating an array field like 'aboutmedesc' or 'recenttechnologies'
-                updatedData[field][subIndex] = value;
-            } else if (field && index !== null) {
-                // If we are updating a field inside 'built' or 'projects' array
-                updatedData[field][index] = {
-                    ...updatedData[field][index],
-                    [name]: value
+            if(item==="built"){
+                const updatedBuilt = [...prev.built];  
+                updatedBuilt[index] = {                
+                    ...updatedBuilt[index],            
+                    [name]: value,                    
                 };
-            } else if (index !== null) {
-                // Handle updating nested fields like 'aboutme.aboutmedesc'
-                updatedData.aboutme.aboutmedesc[index] = value;
-            } else {
-                // Handle top-level fields
-                updatedData = {
+    
+                return {
                     ...prev,
-                    [name]: value
+                    built: updatedBuilt,               
                 };
+
             }
-    
-            return updatedData;
+            return {
+                ...prev,
+                [name]: value,
+            };
         });
     };
-    
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    };
 
     return (
         <Box
             component="form"
+            onSubmit={handleSubmit}
             sx={{
                 color: 'white',
-                padding: '20px'
+                padding: '20px',
+                maxWidth: '400px',
+                margin: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
             }}
         >
             <Typography variant="h6">Input Form</Typography>
 
-            {/* Top-Level Fields */}
             <TextField
                 label="Name"
                 variant="outlined"
@@ -57,6 +63,7 @@ function Dataform() {
                 fullWidth
             />
 
+            {/* Description Field */}
             <TextField
                 label="Description"
                 variant="outlined"
@@ -75,124 +82,32 @@ function Dataform() {
                 fullWidth
             />
 
-            <TextField
-                label="Mail"
-                variant="outlined"
-                name="mail"
-                value={data?.mail || ''}
-                onChange={handleChange}
-                fullWidth
-            />
+            Built
 
-            {/* About Me Section */}
-            <Typography variant="h6">About Me</Typography>
 
-            {data?.aboutme?.aboutmedesc?.map((desc, index) => (
-                <TextField
-                    key={index}
-                    label={`About Me Description ${index + 1}`}
-                    variant="outlined"
-                    value={desc}
-                    onChange={(event) => handleChange(event, index)}
-                    fullWidth
-                />
-            ))}
-
-            {data?.aboutme?.recenttechnologies?.map((tech, index) => (
-                <TextField
-                    key={index}
-                    label={`Recent Technology ${index + 1}`}
-                    variant="outlined"
-                    value={tech}
-                    onChange={(event) => handleChange(event, index, 'aboutme.recenttechnologies')}
-                    fullWidth
-                />
-            ))}
-
-            {/* Built Projects */}
-            <Typography variant="h6">Built Projects</Typography>
-
-            {data?.built?.map((item, index) => (
-                <Box key={index}>
-                    <TextField
+            {data?.built?.map((item, index) => {
+                return (
+                    <> <TextField
                         label="Project Name"
                         variant="outlined"
                         name="name"
                         value={item?.name || ''}
-                        onChange={(event) => handleChange(event, index, 'built')}
+                        onChange={(event) => handleChange(event, index,"built")}
                         fullWidth
-                    />
 
-                    <TextField
-                        label="Project Description"
-                        variant="outlined"
-                        name="desc"
-                        value={item?.desc || ''}
-                        onChange={(event) => handleChange(event, index, 'built')}
-                        fullWidth
-                    />
-
-                    {item?.technologies?.map((tech, techIndex) => (
-                        <TextField
-                            key={techIndex}
-                            label={`Technology ${techIndex + 1}`}
+                    /><TextField
+                            label="Project Desciption"
                             variant="outlined"
-                            value={tech}
-                            onChange={(event) => handleChange(event, techIndex, `built[${index}].technologies`)}
+                            name="desc"
+                            value={item?.desc || ''}
+                            onChange={(event) => handleChange(event, index,"built")}
                             fullWidth
-                        />
-                    ))}
 
-                    {item?.references?.map((ref, refIndex) => (
-                        <TextField
-                            key={refIndex}
-                            label={`Reference ${refIndex + 1}`}
-                            variant="outlined"
-                            name="ref"
-                            value={ref?.ref || ''}
-                            onChange={(event) => handleChange(event, index, 'built')}
-                            fullWidth
-                        />
-                    ))}
-                </Box>
-            ))}
+                        /></>
+                );
+            })}
 
-            {/* Additional Projects */}
-            <Typography variant="h6">Additional Projects</Typography>
-
-            {data?.projects?.map((project, index) => (
-                <Box key={index}>
-                    <TextField
-                        label="Project Name"
-                        variant="outlined"
-                        name="name"
-                        value={project?.name || ''}
-                        onChange={(event) => handleChange(event, index, 'projects')}
-                        fullWidth
-                    />
-
-                    <TextField
-                        label="Project Description"
-                        variant="outlined"
-                        name="desc"
-                        value={project?.desc || ''}
-                        onChange={(event) => handleChange(event, index, 'projects')}
-                        fullWidth
-                    />
-
-                    {project?.technologies?.map((tech, techIndex) => (
-                        <TextField
-                            key={techIndex}
-                            label={`Technology ${techIndex + 1}`}
-                            variant="outlined"
-                            value={tech}
-                            onChange={(event) => handleChange(event, techIndex, `projects[${index}].technologies`)}
-                            fullWidth
-                        />
-                    ))}
-                </Box>
-            ))}
-
+            {/* Submit Button */}
             <Button type="submit" variant="contained" color="primary" fullWidth>
                 Submit
             </Button>
