@@ -21,7 +21,7 @@ const customTheme = createTheme({
 
 function App() {
   const { data } = useContext(DataContext);
-  if (process.env.REACT_APP_BUILD_FOR_PREVIEW === 'false') {
+  if (process.env.REACT_APP_BUILD_FOR_PREVIEW === "true") {
     return <ThemeProvider theme={customTheme}>
       <Routes>
         <Route
