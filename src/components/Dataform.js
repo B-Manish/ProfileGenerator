@@ -180,6 +180,14 @@ const Dataform = () => {
         });
     };
 
+    const handleRemoveBuiltProject = (projectIndex) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects.splice(projectIndex, 1);
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
 
 
     // Handlers for "Projects" section
@@ -422,6 +430,10 @@ const Dataform = () => {
                             onClick={() => handleAddTechToBuiltProject(projectIndex)}
                         >
                             Add Technology
+                        </Button>
+
+                        <Button variant="contained" onClick={() => handleRemoveBuiltProject(projectIndex)}>
+                            Remove New Built Project
                         </Button>
                     </Box>
                 ))}
