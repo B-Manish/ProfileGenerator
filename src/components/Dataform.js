@@ -1,160 +1,204 @@
-import React, { useContext } from "react";
-import { DataContext } from '../contexts/DataContext';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import React, { useState,useContext } from 'react';
+import { Button, TextField, Box, Typography, IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { DataContext } from "../contexts/DataContext";
 
-function Dataform() {
-    const { data, setData } = useContext(DataContext);
+const Dataform = () => {
+const {data,setData}=useContext(DataContext);
+  // Handlers for "Profile Info" section
+  const handleChange = (field, value) => {
+    setData((prevData) => ({ ...prevData, [field]: value }));
+  };
 
-    const handleInputChange = (event, key, subKey, index) => {
-        const value = event.target.value;
-        setData((prevData) => {
-          const updatedData = { ...prevData };
-    
-          if (subKey) {
-            updatedData[key][subKey][index] = value;
-          } else {
-            updatedData[key] = value;
-          }
-    
-          return updatedData;
-        });
+  // Handlers for "About Me" section
+  const handleAboutMeChange = (index, newValue) => {
+    setData((prevData) => {
+      const updatedAboutMeDesc = [...prevData.aboutme.aboutmedesc];
+      updatedAboutMeDesc[index] = newValue;
+      return {
+        ...prevData,
+        aboutme: {
+          ...prevData.aboutme,
+          aboutmedesc: updatedAboutMeDesc,
+        },
       };
-    
-      const handleArrayInputChange = (event, key, subKey, index) => {
-        const value = event.target.value;
-        setData((prevData) => {
-          const updatedData = { ...prevData };
-          updatedData[key][subKey][index] = value;
-          return updatedData;
-        });
-      };
+    });
+  };
 
-    return (
-        <Box>
-        {/* Basic Information */}
+  const handleAddAboutMe = () => {
+    setData((prevData) => ({
+      ...prevData,
+      aboutme: {
+        ...prevData.aboutme,
+        aboutmedesc: [...prevData.aboutme.aboutmedesc, 'New description'],
+      },
+    }));
+  };
+
+  // Handlers for "Recent Technologies"
+  const handleTechChange = (index, newValue) => {
+    setData((prevData) => {
+      const updatedTechnologies = [...prevData.aboutme.recenttechnologies];
+      updatedTechnologies[index] = newValue;
+      return {
+        ...prevData,
+        aboutme: {
+          ...prevData.aboutme,
+          recenttechnologies: updatedTechnologies,
+        },
+      };
+    });
+  };
+
+  const handleAddTech = () => {
+    setData((prevData) => ({
+      ...prevData,
+      aboutme: {
+        ...prevData.aboutme,
+        recenttechnologies: [...prevData.aboutme.recenttechnologies, 'New Tech'],
+      },
+    }));
+  };
+
+  // Handlers for "Projects" section
+  const handleProjectNameChange = (index, newName) => {
+    setData((prevData) => {
+      const updatedProjects = [...prevData.projects];
+      updatedProjects[index] = {
+        ...updatedProjects[index],
+        name: newName,
+      };
+      return { ...prevData, projects: updatedProjects };
+    });
+  };
+
+  const handleAddProject = () => {
+    setData((prevData) => {
+      const newProject = {
+        name: 'New Project',
+        desc: 'New Project Description',
+        technologies: ['Techstack 1'],
+      };
+      return {
+        ...prevData,
+        projects: [...prevData.projects, newProject],
+      };
+    });
+  };
+
+  return (
+    <Box sx={{ padding: 2 }}>
+      <Typography variant="h4" gutterBottom>
+        Edit Profile
+      </Typography>
+
+      {/* Profile Info Section */}
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant="h6">Profile Info</Typography>
         <TextField
           fullWidth
           label="Name"
           value={data.name}
-          onChange={(e) => handleInputChange(e, 'name')}
-          margin="normal"
+          onChange={(e) => handleChange('name', e.target.value)}
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           fullWidth
           label="Description"
           value={data.desc}
-          onChange={(e) => handleInputChange(e, 'desc')}
-          margin="normal"
-          multiline
+          onChange={(e) => handleChange('desc', e.target.value)}
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           fullWidth
           label="Brief Description"
           value={data.briefdesc}
-          onChange={(e) => handleInputChange(e, 'briefdesc')}
-          margin="normal"
-          multiline
+          onChange={(e) => handleChange('briefdesc', e.target.value)}
+          sx={{ marginBottom: 2 }}
         />
         <TextField
           fullWidth
-          label="Email"
+          label="Mail"
           value={data.mail}
-          onChange={(e) => handleInputChange(e, 'mail')}
-          margin="normal"
-          type="email"
+          onChange={(e) => handleChange('mail', e.target.value)}
         />
-  
-        {/* About Me Section */}
-        <Typography variant="h6" gutterBottom>About Me</Typography>
+      </Box>
+
+      {/* About Me Section */}
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant="h6">About Me</Typography>
         {data.aboutme.aboutmedesc.map((desc, index) => (
-          <TextField
-            key={index}
-            fullWidth
-            label={`About Me Description ${index + 1}`}
-            value={desc}
-            onChange={(e) => handleArrayInputChange(e, 'aboutme', 'aboutmedesc', index)}
-            margin="normal"
-            multiline
-          />
-        ))}
-  
-        <Typography variant="h6" gutterBottom>Recent Technologies</Typography>
-        {data.aboutme.recenttechnologies.map((tech, index) => (
-          <TextField
-            key={index}
-            fullWidth
-            label={`Technology ${index + 1}`}
-            value={tech}
-            onChange={(e) => handleArrayInputChange(e, 'aboutme', 'recenttechnologies', index)}
-            margin="normal"
-          />
-        ))}
-  
-        {/* Built Projects */}
-        <Typography variant="h6" gutterBottom>Built Projects</Typography>
-        {data.built.map((project, index) => (
-          <Box key={index} mb={3}>
+          <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
             <TextField
               fullWidth
-              label="Project Name"
-              value={project.name}
-              onChange={(e) => handleArrayInputChange(e, 'built', 'name', index)}
-              margin="normal"
+              label={`Description ${index + 1}`}
+              value={desc}
+              onChange={(e) => handleAboutMeChange(index, e.target.value)}
+              sx={{ marginRight: 2 }}
             />
-            <TextField
-              fullWidth
-              label="Project Description"
-              value={project.desc}
-              onChange={(e) => handleArrayInputChange(e, 'built', 'desc', index)}
-              margin="normal"
-              multiline
-            />
-            {project.technologies.map((tech, techIndex) => (
-              <TextField
-                key={techIndex}
-                fullWidth
-                label={`Technology ${techIndex + 1}`}
-                value={tech}
-                onChange={(e) => handleArrayInputChange(e, 'built', 'technologies', techIndex)}
-                margin="normal"
-              />
-            ))}
-          </Box>
-        ))}
-  
-        {/* Other Projects */}
-        <Typography variant="h6" gutterBottom>Other Projects</Typography>
-        {data.projects.map((project, index) => (
-          <Box key={index} mb={3}>
-            <TextField
-              fullWidth
-              label="Project Name"
-              value={project.name}
-              onChange={(e) => handleArrayInputChange(e, 'projects', 'name', index)}
-              margin="normal"
-            />
-            <TextField
-              fullWidth
-              label="Project Description"
-              value={project.desc}
-              onChange={(e) => handleArrayInputChange(e, 'projects', 'desc', index)}
-              margin="normal"
-              multiline
-            />
-            {project.technologies.map((tech, techIndex) => (
-              <TextField
-                key={techIndex}
-                fullWidth
-                label={`Technology ${techIndex + 1}`}
-                value={tech}
-                onChange={(e) => handleArrayInputChange(e, 'projects', 'technologies', techIndex)}
-                margin="normal"
-              />
-            ))}
+            <IconButton onClick={handleAddAboutMe}>
+              <AddIcon />
+            </IconButton>
           </Box>
         ))}
       </Box>
-    );
-}
+
+      {/* Recent Technologies Section */}
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant="h6">Recent Technologies</Typography>
+        {data.aboutme.recenttechnologies.map((tech, index) => (
+          <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+            <TextField
+              fullWidth
+              label={`Technology ${index + 1}`}
+              value={tech}
+              onChange={(e) => handleTechChange(index, e.target.value)}
+              sx={{ marginRight: 2 }}
+            />
+            <IconButton onClick={handleAddTech}>
+              <AddIcon />
+            </IconButton>
+          </Box>
+        ))}
+      </Box>
+
+      {/* Projects Section */}
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant="h6">Projects</Typography>
+        {data.projects.map((project, index) => (
+          <Box key={index} sx={{ marginBottom: 2 }}>
+            <TextField
+              fullWidth
+              label="Project Name"
+              value={project.name}
+              onChange={(e) => handleProjectNameChange(index, e.target.value)}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              fullWidth
+              label="Project Description"
+              value={project.desc}
+              onChange={(e) =>
+                setData((prevData) => {
+                  const updatedProjects = [...prevData.projects];
+                  updatedProjects[index] = {
+                    ...updatedProjects[index],
+                    desc: e.target.value,
+                  };
+                  return { ...prevData, projects: updatedProjects };
+                })
+              }
+              sx={{ marginBottom: 2 }}
+            />
+          </Box>
+        ))}
+        <Button variant="contained" onClick={handleAddProject}>
+          Add New Project
+        </Button>
+      </Box>
+    </Box>
+  );
+};
 
 export default Dataform;
