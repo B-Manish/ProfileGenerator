@@ -4,7 +4,7 @@ import "../App.css";
 import CustomButton from "./Custombutton";
 import { useMediaQuery } from "@mui/material";
 
-function Getintouch({ setContactRef }) {
+function Getintouch({ setContactRef ,name="name" }) {
   const isSxScreen = useMediaQuery("(max-width:599px)");
   const mainRef = useRef(null);
 
@@ -101,7 +101,7 @@ function Getintouch({ setContactRef }) {
               // margin: "0 0 19px 0",
             }}
           >
-            Built by Batchu Manish
+            Built by {name}
           </Box>
         </Box>
       </Grid>
