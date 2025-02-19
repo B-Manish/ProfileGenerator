@@ -9,7 +9,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Worked({ setExpRef,preview=false }) {
+function Worked({ setExpRef, preview = false, data }) {
   const mainRef = useRef(null);
   const isMdScreen = useMediaQuery("(max-width:899px)");
   const isSxScreen = useMediaQuery("(max-width:599px)");
@@ -94,7 +94,7 @@ function Worked({ setExpRef,preview=false }) {
                   mb: "20px",
                 }}
               >
-                PSIOG Digital Ltd
+                {data?.company}
               </Box>
             ) : (
               <Grid item xs={3}>
@@ -108,7 +108,7 @@ function Worked({ setExpRef,preview=false }) {
                     cursor: "pointer",
                   }}
                 >
-                  PSIOG Digital Ltd
+                  {data?.company}
                 </Box>
               </Grid>
             )}
@@ -124,7 +124,7 @@ function Worked({ setExpRef,preview=false }) {
                   whiteSpace: "nowrap",
                 }}
               >
-                Software Engineer
+                {data?.role}
               </Box>
               <Box
                 className="roboto"
@@ -134,20 +134,23 @@ function Worked({ setExpRef,preview=false }) {
                   mb: "20px",
                 }}
               >
-                June 2023 - Present
+                {data?.time}
               </Box>
 
-              <Box sx={{ display: "flex" }}>
-                <Box sx={{ paddingRight: "17px" }}>
-                  <PlayArrowIcon
-                    style={{ color: "#64FFDA", fontSize: "12px" }}
-                  />
-                </Box>
-                <Box sx={{ color: "#8892b0" }} className="customdmsans">
-                  Worked on docusaurus,react and played a major role in
-                  development of its heavy state based logic requirements.
-                </Box>
-              </Box>
+              {data?.worked?.map((work, index) => {
+                return (
+                  <Box sx={{ display: "flex" }}>
+                    <Box sx={{ paddingRight: "17px" }}>
+                      <PlayArrowIcon
+                        style={{ color: "#64FFDA", fontSize: "12px" }}
+                      />
+                    </Box>
+                    <Box sx={{ color: "#8892b0" }} className="customdmsans">
+                      {work}
+                    </Box>
+                  </Box>
+                );
+              })}
             </Grid>
           </Grid>
         </Box>

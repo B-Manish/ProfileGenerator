@@ -131,7 +131,7 @@ function Template({ page, mail,preview=false }) {
         )}
       </Grid>
       <Aboutme setAboutRef={setAboutRef} data={data?.aboutme} preview={preview}/>
-      <Worked setExpRef={setExpRef} preview={preview}/>
+      <Worked setExpRef={setExpRef} preview={preview} data={data?.worked}/>
       <Built setBuiltRef={setBuiltRef} data={data?.built} preview={preview}/>
       <OtherProjects data={data?.projects} preview={preview}/>
       <Getintouch setContactRef={setContactRef} name={data?.name}/>
