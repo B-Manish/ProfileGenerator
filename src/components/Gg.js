@@ -11,7 +11,6 @@ function Gg() {
         <Grid
             container
             sx={{
-                height: "100vh",
                 background: "#0A192F",
             }}
         >
