@@ -14,22 +14,23 @@ function Gg() {
                 height: "100vh",
                 background: "#0A192F",
             }}
-        > 
-         <Grid item xs={4.5}><Dataform/></Grid>
-         <Grid item xs={7.5} >
-            <Box 
-             sx={{
-             width: '90%',
-             aspectRatio: '16 / 9',
-             border:'1px solid white',
-             display: 'flex',
-            //   alignItems: 'center',
-             justifyContent: 'center',
-             overflowY: 'scroll',
-             overflowX: 'hidden',
+        >
+            <Grid item xs={4.5}><Dataform /></Grid>
+            <Grid item xs={7.5} >
+                <Box
+                    sx={{
+                        width: '70%',
+                        aspectRatio: '16 / 9',
+                        border: '1px solid white',
+                        // display: 'flex',
+                        // alignItems: 'center',
+                        // justifyContent: 'center',
+                        overflowY: 'scroll',
+                        // overflowX: 'scroll',
+                        position:'fixed'
 
-            }}><Viewpreview/></Box>
-         </Grid>
+                    }}><Viewpreview /></Box>
+            </Grid>
         </Grid>
     );
 }

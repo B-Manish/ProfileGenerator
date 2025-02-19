@@ -1,11 +1,12 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, TextField, Box, Typography, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { DataContext } from "../contexts/DataContext";
 
 const Dataform = () => {
-const {data,setData}=useContext(DataContext);
+  const { data, setData } = useContext(DataContext);
+
   // Handlers for "Profile Info" section
   const handleChange = (field, value) => {
     setData((prevData) => ({ ...prevData, [field]: value }));
@@ -36,6 +37,21 @@ const {data,setData}=useContext(DataContext);
     }));
   };
 
+  const handleRemoveAboutMe = (index) => {
+    setData((prevData) => {
+      const updatedAboutMeDesc = prevData.aboutme.aboutmedesc.filter(
+        (_, i) => i !== index
+      );
+      return {
+        ...prevData,
+        aboutme: {
+          ...prevData.aboutme,
+          aboutmedesc: updatedAboutMeDesc,
+        },
+      };
+    });
+  };
+
   // Handlers for "Recent Technologies"
   const handleTechChange = (index, newValue) => {
     setData((prevData) => {
@@ -56,9 +72,27 @@ const {data,setData}=useContext(DataContext);
       ...prevData,
       aboutme: {
         ...prevData.aboutme,
-        recenttechnologies: [...prevData.aboutme.recenttechnologies, 'New Tech'],
+        recenttechnologies: [
+          ...prevData.aboutme.recenttechnologies,
+          'New Tech',
+        ],
       },
     }));
+  };
+
+  const handleRemoveTech = (index) => {
+    setData((prevData) => {
+      const updatedTechnologies = prevData.aboutme.recenttechnologies.filter(
+        (_, i) => i !== index
+      );
+      return {
+        ...prevData,
+        aboutme: {
+          ...prevData.aboutme,
+          recenttechnologies: updatedTechnologies,
+        },
+      };
+    });
   };
 
   // Handlers for "Projects" section
@@ -84,6 +118,13 @@ const {data,setData}=useContext(DataContext);
         ...prevData,
         projects: [...prevData.projects, newProject],
       };
+    });
+  };
+
+  const handleRemoveProject = (index) => {
+    setData((prevData) => {
+      const updatedProjects = prevData.projects.filter((_, i) => i !== index);
+      return { ...prevData, projects: updatedProjects };
     });
   };
 
@@ -129,7 +170,10 @@ const {data,setData}=useContext(DataContext);
       <Box sx={{ marginBottom: 4 }}>
         <Typography variant="h6">About Me</Typography>
         {data.aboutme.aboutmedesc.map((desc, index) => (
-          <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Box
+            key={index}
+            sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}
+          >
             <TextField
               fullWidth
               label={`Description ${index + 1}`}
@@ -140,6 +184,9 @@ const {data,setData}=useContext(DataContext);
             <IconButton onClick={handleAddAboutMe}>
               <AddIcon />
             </IconButton>
+            <IconButton onClick={() => handleRemoveAboutMe(index)}>
+              <RemoveIcon />
+            </IconButton>
           </Box>
         ))}
       </Box>
@@ -148,7 +195,10 @@ const {data,setData}=useContext(DataContext);
       <Box sx={{ marginBottom: 4 }}>
         <Typography variant="h6">Recent Technologies</Typography>
         {data.aboutme.recenttechnologies.map((tech, index) => (
-          <Box key={index} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Box
+            key={index}
+            sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}
+          >
             <TextField
               fullWidth
               label={`Technology ${index + 1}`}
@@ -158,6 +208,9 @@ const {data,setData}=useContext(DataContext);
             />
             <IconButton onClick={handleAddTech}>
               <AddIcon />
+            </IconButton>
+            <IconButton onClick={() => handleRemoveTech(index)}>
+              <RemoveIcon />
             </IconButton>
           </Box>
         ))}
@@ -191,6 +244,9 @@ const {data,setData}=useContext(DataContext);
               }
               sx={{ marginBottom: 2 }}
             />
+            <IconButton onClick={() => handleRemoveProject(index)}>
+              <RemoveIcon />
+            </IconButton>
           </Box>
         ))}
         <Button variant="contained" onClick={handleAddProject}>
