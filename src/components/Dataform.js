@@ -107,6 +107,81 @@ const Dataform = () => {
 
 
 
+    // Handlers for "Some things i have build" section
+
+    const handleBuiltProjectNameChange = (index, newName) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects[index] = {
+                ...updatedProjects[index],
+                name: newName,
+            };
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
+    const handleBuiltProjectDescriptionChange = (index, newDesc) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects[index] = {
+                ...updatedProjects[index],
+                desc: newDesc,
+            };
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
+
+    const handleAddTechToBuiltProject = (projectIndex) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects[projectIndex].technologies.push('New Tech');
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
+    const handleRemoveTechFromBuiltProject = (projectIndex, techIndex) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects[projectIndex].technologies.splice(techIndex, 1);
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
+    const handleTechChangeInBuiltProject = (projectIndex, techIndex, newValue) => {
+        setData((prevData) => {
+            const updatedProjects = [...prevData.built];
+            updatedProjects[projectIndex].technologies[techIndex] = newValue;
+            return { ...prevData, built: updatedProjects };
+        });
+    };
+
+    const handleAddBuiltProject = () => {
+        setData((prevData) => {
+            const newProject = {
+                name: 'New Project',
+                desc: 'New Project Description',
+                technologies: ['Techstack 1'],
+                references: [
+                    {
+                        "ref": "Github",
+                        "to": "/"
+                    },
+                    {
+                        "ref": "Github",
+                        "to": "/"
+                    }
+                ]
+            };
+            return {
+                ...prevData,
+                built: [...prevData.built, newProject],
+            };
+        });
+    };
+
+
+
     // Handlers for "Projects" section
     const handleProjectNameChange = (index, newName) => {
         setData((prevData) => {
@@ -294,6 +369,68 @@ const Dataform = () => {
           Add New Project
         </Button>
       </Box> */}
+
+
+
+
+
+
+
+
+
+
+
+            {/* Some things i have built Section */}
+            <Box sx={{ marginBottom: 4 }}>
+                <Typography variant="h6">Built</Typography>
+                {data?.built?.map((project, projectIndex) => (
+                    <Box key={projectIndex} sx={{ marginBottom: 2 }}>
+                        <CustomTextField
+                            fullWidth
+                            label="Project Name"
+                            value={project.name}
+                            onChange={(e) => handleBuiltProjectNameChange(projectIndex, e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        />
+                        <CustomTextField
+                            fullWidth
+                            label="Project Description"
+                            value={project.desc}
+                            onChange={(e) => handleBuiltProjectDescriptionChange(projectIndex, e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        />
+
+                        {/* Technologies in the project */}
+                        <Typography variant="subtitle1">Technologies</Typography>
+                        {project.technologies.map((tech, techIndex) => (
+                            <Box key={techIndex} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+                                <CustomTextField
+                                    fullWidth
+                                    label={`Technology ${techIndex + 1}`}
+                                    value={tech}
+                                    onChange={(e) => handleTechChangeInBuiltProject(projectIndex, techIndex, e.target.value)}
+                                    sx={{ marginRight: 2 }}
+                                />
+                                <IconButton onClick={() => handleRemoveTechFromBuiltProject(projectIndex, techIndex)}>
+                                    <RemoveIcon />
+                                </IconButton>
+                            </Box>
+                        ))}
+                        <Button
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            onClick={() => handleAddTechToBuiltProject(projectIndex)}
+                        >
+                            Add Technology
+                        </Button>
+                    </Box>
+                ))}
+                <Button variant="contained" onClick={handleAddBuiltProject}>
+                    Add New Built Project
+                </Button>
+            </Box>
+
+
 
 
 
