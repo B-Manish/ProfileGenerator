@@ -9,17 +9,20 @@ import CustomModal from "./CustomModal";
 import CustomDivider from "./Divider";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Navbar({ aboutRef, builtRef, contactRef, expRef,preview=false }) {
+function Navbar({ aboutRef, builtRef, contactRef, expRef, preview = false }) {
   const navbaritems = ["About", "Experience", "Work", "Contact"];
   const [openModal, setOpenModal] = useState(false);
   const isSxScreen = useMediaQuery("(max-width:599px)");
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".items",
-      { opacity: 0, y: -30 }, // Start from -100px (off-screen top)
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 } // Animate to the original position
-    );
+    if (preview = false) {
+      gsap.fromTo(
+        ".items",
+        { opacity: 0, y: -30 }, // Start from -100px (off-screen top)
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 } // Animate to the original position
+      );
+    }
+
 
     gsap.fromTo(".logo", { opacity: 0 }, { opacity: 1, delay: "0.2" });
   }, []);
@@ -103,7 +106,7 @@ function Navbar({ aboutRef, builtRef, contactRef, expRef,preview=false }) {
         justifyContent: "space-between",
         height: "85px",
         alignItems: "center",
-        position: preview==false && "fixed" ,
+        position: preview == false && "fixed",
         fontFamily: '"Roboto Mono", monospace',
         backdropFilter: " blur(50px)",
         boxShadow: !isAtTop && "0 4px 20px rgba(0, 0, 0, 0.3)",

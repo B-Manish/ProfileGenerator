@@ -44,22 +44,11 @@ const DataProvider = ({ children }) => {
         ],
         "projects": [
             {
-                "name": "Ecommerce website",
-                "desc": "Developed a e-commerce website using React, with state management handled via Context API and Redux. Integrated the FakeStore API for product data, implementing features like product listings and shopping cart functionality. This project enhanced my skills in building scalable React applications and managing dynamic state effectively.",
+                "name": "Project",
+                "desc": "Description",
                 "technologies": [
-                    "React",
-                    "Fakestore API",
-                    "Context API",
-                    "MUI"
-                ]
-            },
-            {
-                "name": "Clone of cricbuzz",
-                "desc": "Made a clone of cricbuzz where an admin creates a matches and the user can monitor scores on the application.",
-                "technologies": [
-                    "Angular",
-                    ".NET",
-                    "Swagger"
+                    "Tech1",
+                    "Tech2"
                 ]
             }
         ]
@@ -67,7 +56,7 @@ const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider
             value={{
-                data,setData
+                data, setData
             }}
         >
             {children}

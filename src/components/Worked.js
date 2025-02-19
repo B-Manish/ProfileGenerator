@@ -9,7 +9,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Worked({ setExpRef }) {
+function Worked({ setExpRef,preview=false }) {
   const mainRef = useRef(null);
   const isMdScreen = useMediaQuery("(max-width:899px)");
   const isSxScreen = useMediaQuery("(max-width:599px)");
