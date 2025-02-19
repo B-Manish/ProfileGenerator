@@ -20,14 +20,21 @@ const DataProvider = ({ children }) => {
       ],
       profileimg: placeholder,
     },
-    worked: {
+    worked: [{
       company: "GG company",
       role: "SE",
       time: "June 2023 - Present",
       worked: [
         "Worked on docusaurus,react and played a major role in development of its heavy state based logic requirements.",
       ],
-    },
+    },{
+      company: "GG company",
+      role: "Software Developer",
+      time: "June 2023 - Present",
+      worked: [
+        "sdsds sdsd s",
+      ],
+    }],
     built: [
       {
         name: "Project Name",
