@@ -340,44 +340,6 @@ const Dataform = () => {
                 ))}
             </Box>
 
-            {/* Projects Section */}
-            {/* <Box sx={{ marginBottom: 4 }}>
-        <Typography variant="h6">Projects</Typography>
-        {data.projects.map((project, index) => (
-          <Box key={index} sx={{ marginBottom: 2 }}>
-            <CustomTextField
-              fullWidth
-              label="Project Name"
-              value={project.name}
-              onChange={(e) => handleProjectNameChange(index, e.target.value)}
-              sx={{ marginBottom: 2 }}
-            />
-            <CustomTextField
-              fullWidth
-              label="Project Description"
-              value={project.desc}
-              onChange={(e) =>
-                setData((prevData) => {
-                  const updatedProjects = [...prevData.projects];
-                  updatedProjects[index] = {
-                    ...updatedProjects[index],
-                    desc: e.target.value,
-                  };
-                  return { ...prevData, projects: updatedProjects };
-                })
-              }
-              sx={{ marginBottom: 2 }}
-            />
-            <IconButton onClick={() => handleRemoveProject(index)}>
-              <RemoveIcon />
-            </IconButton>
-          </Box>
-        ))}
-        <Button variant="contained" onClick={handleAddProject}>
-          Add New Project
-        </Button>
-      </Box> */}
-
 
 
 
@@ -459,7 +421,7 @@ const Dataform = () => {
 
             {/* Projects Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Projects</Typography>
+                <Typography variant="h6">Other Projects</Typography>
                 {data.projects.map((project, projectIndex) => (
                     <Box key={projectIndex} sx={{ marginBottom: 2 }}>
                         <CustomTextField

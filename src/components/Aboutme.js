@@ -11,7 +11,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Aboutme({ setAboutRef, data, preview = false }) {
+function Aboutme({ setAboutRef, data, preview = false}) {
   const mainRef = useRef(null);
   const containerRef = useRef(null);
   const isMdScreen = useMediaQuery("(max-width:899px)");
@@ -66,7 +66,7 @@ function Aboutme({ setAboutRef, data, preview = false }) {
             width: isSxScreen ? "100%" : "75%",
             maxWidth: "900px",
             minHeight: "500px",
-            opacity: preview===true?"1":"0",
+            opacity: preview === true ? "1" : "0",
           }}
           ref={containerRef}
         >
@@ -170,27 +170,28 @@ function Aboutme({ setAboutRef, data, preview = false }) {
                   </>
                 )}
             </Box>
-            <Box
-              sx={{
-                maxWidth: isMdScreen ? "100%" : "389px",
-                padding: isMdScreen ? "25px 0 0 0" : "0 0 0 30px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: isMdScreen && "60px",
-              }}
-            >
+            {data?.profileimg &&
               <Box
                 sx={{
-                  background: ` url(${profile})`,
-                  minHeight: "250px",
-                  minWidth: "250px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
+                  maxWidth: isMdScreen ? "100%" : "389px",
+                  padding: isMdScreen ? "25px 0 0 0" : "0 0 0 30px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: isMdScreen && "60px",
                 }}
-              />
-            </Box>
+              >
+                <Box
+                  sx={{
+                    background: ` url(${data?.profileimg})`,
+                    minHeight: "250px",
+                    minWidth: "250px",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </Box>}
           </Box>
         </Box>
       </Grid>

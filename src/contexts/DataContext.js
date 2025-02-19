@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import placeholder from "../static/placeholder.png";
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
@@ -20,7 +21,8 @@ const DataProvider = ({ children }) => {
                 "Node.js",
                 "Python(LLMs)",
                 "Three.js"
-            ]
+            ],
+            "profileimg":placeholder
         },
         "built": [
             {
