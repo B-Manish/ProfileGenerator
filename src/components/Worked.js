@@ -3,6 +3,7 @@ import "../App.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WorkedComponent from "./WorkedComponent";
+import { Box } from "@mui/material";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,8 +15,9 @@ function Worked({ setExpRef, preview = false, data }) {
   }, []);
 
   return (
-    <WorkedComponent data={data}/>
-    
+    <Box ref={mainRef}>
+      <WorkedComponent data={data} /></Box>
+
   );
 }
 
