@@ -22,11 +22,11 @@ const customTheme = createTheme({
 
 function App() {
 
-
+  const routeToBuild = process.env.REACT_APP_BUILD_ROUTE;
 
   return <ThemeProvider theme={customTheme}>
     <Routes>
-      <Route
+      {routeToBuild === "home" && <Route
         path="/"
         element={
           <Template
@@ -42,13 +42,16 @@ function App() {
             }
           />
         }
-      />
-      <Route
-        path="/preview"
+      />}
+
+      {routeToBuild === "preview" && <Route
+        path="/"
         element={
           <Gg />
         }
-      />
+      />}
+
+
     </Routes>
   </ThemeProvider>;
 }

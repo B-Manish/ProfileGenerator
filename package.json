@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "adm-zip": "^0.5.16",
     "axios": "^1.7.9",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "form-data": "^4.0.2",
     "framer-motion": "^10.18.0",
@@ -31,9 +32,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:home": "cross-env REACT_APP_BUILD_ROUTE=home npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && node deploy.js"
+    "deploy": "npm run build:home && node deploy.js"
   },
   "eslintConfig": {
     "extends": [
