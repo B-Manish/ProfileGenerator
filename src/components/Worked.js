@@ -15,8 +15,8 @@ function Worked({ setExpRef, preview = false, data }) {
   }, []);
 
   return (
-    <Box ref={mainRef}>
-      <WorkedComponent data={data} /></Box>
+    <Box ref={mainRef} sx={{ width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <WorkedComponent data={data} /></Box >
 
   );
 }
