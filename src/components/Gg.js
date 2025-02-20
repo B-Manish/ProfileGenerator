@@ -15,22 +15,18 @@ function Gg() {
             }}
         >
             <Grid item xs={4.5}><Dataform /></Grid>
-            <Grid item xs={7.5} >
-                <Box
+            <Grid item xs={7.5} sx={{ display: 'flex', justifyContent: 'center', height: '100vh', alignItems: 'center' }}>
+                < Box
                     sx={{
-                        width: '70%',
+                        height: '70%',
                         aspectRatio: '16 / 9',
                         border: '1px solid white',
-                        // display: 'flex',
-                        // alignItems: 'center',
-                        // justifyContent: 'center',
                         overflowY: 'scroll',
-                        // overflowX: 'scroll',
-                        position:'fixed'
+                        position: 'fixed'
 
                     }}><Viewpreview /></Box>
             </Grid>
-        </Grid>
+        </Grid >
     );
 }
 
