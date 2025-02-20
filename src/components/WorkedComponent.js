@@ -15,7 +15,7 @@ function WorkedComponent({data}) {
 
 
 
-  const [selectedDataIndex, setSelectedDataInedx] = useState(0);
+  const [selectedDataIndex, setSelectedDataIndex] = useState(0);
 
   return (
     <Grid container sx={{ background: "#0A192F" }} className="ggg">
@@ -92,7 +92,7 @@ function WorkedComponent({data}) {
                       cursor: "pointer",
                       mb: "20px",
                     }}
-                    onClick={() => setSelectedDataInedx(index)}
+                    onClick={() => setSelectedDataIndex(index)}
                   >
                     {company?.company}
                   </Box>
@@ -117,7 +117,7 @@ function WorkedComponent({data}) {
                           selectedDataIndex === index && "#11213F",
                         // mb: "20px",
                       }}
-                      onClick={() => setSelectedDataInedx(index)}
+                      onClick={() => setSelectedDataIndex(index)}
                     >
                       {company?.company}
                     </Box>
