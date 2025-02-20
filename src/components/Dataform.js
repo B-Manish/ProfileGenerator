@@ -190,6 +190,96 @@ const Dataform = () => {
 
 
 
+
+    // Handlers for "Worked" section
+    const handleWorkedNameChange = (index, newCompanyName) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData.worked];
+            updatedWorked[index] = {
+                ...updatedWorked[index],
+                company: newCompanyName,
+            };
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+    const handleWorkedRoleChange = (index, newRole) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData.worked];
+            updatedWorked[index] = {
+                ...updatedWorked[index],
+                role: newRole,
+            };
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+    const handleWorkedTimeChange = (index, newTime) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData.worked];
+            updatedWorked[index] = {
+                ...updatedWorked[index],
+                time: newTime,
+            };
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+
+    const handleAddWorkedtoWorked = (projectIndex) => {
+        setData((prevData) => {
+            const updatedWork = [...prevData.worked];
+            updatedWork[projectIndex].worked.push('Worked on a feature....');
+            return { ...prevData, worked: updatedWork };
+        });
+    };
+
+    const handleWorkedFromWork = (projectIndex, workedIndex) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData.worked];
+            updatedWorked[projectIndex].worked.splice(workedIndex, 1);
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+    const handleWorkedChangeinWorked = (workedIndex, techIndex, newWorked) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData.worked];
+            updatedWorked[workedIndex].worked[techIndex] = newWorked;
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+
+
+    const handleAddWorked = () => {
+        setData((prevData) => {
+            const newWorked = {
+                company: "GG company",
+                role: "SE",
+                time: "June 2023 - Present",
+                worked: [
+                    "Worked on docusaurus,react and played a major role in development of its heavy state based logic requirements.",
+                ],
+            };
+            return {
+                ...prevData,
+                worked: [...prevData.worked, newWorked],
+            };
+        });
+    };
+
+    const handleRemoveWorked = (workedIndex) => {
+        setData((prevData) => {
+            const updatedWorked = [...prevData?.worked];
+            updatedWorked.splice(workedIndex, 1);
+            return { ...prevData, worked: updatedWorked };
+        });
+    };
+
+
+
+
     // Handlers for "Projects" section
     const handleProjectNameChange = (index, newName) => {
         setData((prevData) => {
@@ -341,6 +431,70 @@ const Dataform = () => {
             </Box>
 
 
+
+
+
+
+
+
+            {/* Worked Section */}
+            <Box sx={{ marginBottom: 4 }}>
+                <Typography variant="h6">Worked</Typography>
+                {data?.worked?.map((company, projectIndex) => (
+                    <Box key={projectIndex} sx={{ marginBottom: 2 }}>
+                        <CustomTextField
+                            fullWidth
+                            label="Company Name"
+                            value={company?.company}
+                            onChange={(e) => handleWorkedNameChange(projectIndex, e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        />
+                        <CustomTextField
+                            fullWidth
+                            label="Role"
+                            value={company?.role}
+                            onChange={(e) => handleWorkedRoleChange(projectIndex, e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        />
+                        <CustomTextField
+                            fullWidth
+                            label="Time"
+                            value={company?.time}
+                            onChange={(e) => handleWorkedTimeChange(projectIndex, e.target.value)}
+                            sx={{ marginBottom: 2 }}
+                        />
+
+                        {company.worked.map((tech, techIndex) => (
+                            <Box key={techIndex} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+                                <CustomTextField
+                                    fullWidth
+                                    label={`Work ${techIndex + 1}`}
+                                    value={tech}
+                                    onChange={(e) => handleWorkedChangeinWorked(projectIndex, techIndex, e.target.value)}
+                                    sx={{ marginRight: 2 }}
+                                />
+                                <IconButton onClick={() => handleWorkedFromWork(projectIndex, techIndex)}>
+                                    <RemoveIcon />
+                                </IconButton>
+                            </Box>
+                        ))}
+                        <Button
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            onClick={() => handleAddWorkedtoWorked(projectIndex)}
+                        >
+                            Add Work Experience
+                        </Button>
+
+                        <Button variant="contained" onClick={() => handleRemoveWorked(projectIndex)}>
+                            Remove Work Experience
+                        </Button>
+                    </Box>
+                ))}
+                <Button variant="contained" onClick={handleAddWorked}>
+                    Add New Work Experience
+                </Button>
+            </Box>
 
 
 
