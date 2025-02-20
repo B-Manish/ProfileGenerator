@@ -15,9 +15,6 @@ function Builtcard({ reverse = false, margin, iphone, img = Vscode, data ,previe
     }
   };
 
-  useEffect(() => {
-    console.log("data", data);
-  }, []);
 
   return isMdScreen ? (
     <Box

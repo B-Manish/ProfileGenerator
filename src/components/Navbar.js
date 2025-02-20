@@ -21,10 +21,11 @@ function Navbar({ aboutRef, builtRef, contactRef, expRef, preview = false }) {
         { opacity: 0, y: -30 }, // Start from -100px (off-screen top)
         { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 } // Animate to the original position
       );
+
+
+
+      gsap.fromTo(".logo", { opacity: 0 }, { opacity: 1, delay: "0.2" });
     }
-
-
-    gsap.fromTo(".logo", { opacity: 0 }, { opacity: 1, delay: "0.2" });
   }, []);
 
   const [scrollPosition, setScrollPosition] = useState(0);

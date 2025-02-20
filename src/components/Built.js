@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mui/material";
 import Builtcard from "./Builtcard";
 import Ecomm from "../static/ecomm.png";
 
-function Built({ setBuiltRef, data ,preview}) {
+function Built({ setBuiltRef, data, preview }) {
   const mainRef = useRef(null);
   const [fontSize, setFontSize] = useState(32);
   const isSxScreen = useMediaQuery("(max-width:599px)");
@@ -19,17 +19,22 @@ function Built({ setBuiltRef, data ,preview}) {
     const handleResize = () => {
       const width = window.innerWidth;
 
-      // Increase font size gradually based on screen width
-      if (width < 600) {
-        setFontSize(16);
-      } else if (width < 960) {
-        setFontSize(20);
-      } else if (width < 1280) {
-        setFontSize(24);
-      } else if (width < 1920) {
-        setFontSize(28);
-      } else {
-        setFontSize(32);
+      if (preview == false) {
+
+
+
+        // Increase font size gradually based on screen width
+        if (width < 600) {
+          setFontSize(16);
+        } else if (width < 960) {
+          setFontSize(20);
+        } else if (width < 1280) {
+          setFontSize(24);
+        } else if (width < 1920) {
+          setFontSize(28);
+        } else {
+          setFontSize(32);
+        }
       }
     };
 
