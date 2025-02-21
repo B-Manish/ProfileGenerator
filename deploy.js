@@ -3,9 +3,12 @@ const path = require('path');
 const AdmZip = require('adm-zip');
 const fs = require("fs");
 const FormData = require('form-data');
+const { exec } = require('child_process');
 
 const apiUrl2 = "https://a7wg8ep9di.execute-api.us-east-1.amazonaws.com/default/generateurl";
+const generatepresignedURLapi="https://a7wg8ep9di.execute-api.us-east-1.amazonaws.com/prod/generatepresignedurl";
 const filePath = path.join(__dirname, 'build.zip');
+const fileStream = fs.createReadStream(filePath);
 
 
 const zipBuildFolder = async () => {
@@ -14,27 +17,36 @@ const zipBuildFolder = async () => {
     zip.addLocalFolder(path.join(__dirname, "build"));
     const zipPath = path.join(__dirname, "build.zip");
     zip.writeZip(zipPath);
-    // return zipPath;
+};
+
+const generatepresignedURL = async () => {
+    try {
+        console.log("Generating presigned URL .......");
+        const response = await axios.get(generatepresignedURLapi);
+        console.log("response",response);
+        return response?.data?.presigned_url;
+
+    } catch (error) {
+        console.error("Error fetching APIs:", error);
+    }
 };
 
 
 const uploadFile = async () => {
-  try {
-    const form = new FormData();
+  const presigned_url=await generatepresignedURL();
+  const curlCommand = `curl --request PUT --upload-file "build.zip" "${presigned_url}"`; 
 
-    const filePath = path.join(__dirname, 'build.zip');
-    form.append('file', fs.createReadStream(filePath));
-
-    const response = await axios.post('https://a7wg8ep9di.execute-api.us-east-1.amazonaws.com/prod/upload', form, {
-      headers: {
-        ...form.getHeaders() // Set the headers required by the form (multipart/form-data)
+  exec(curlCommand, (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Error executing curl: ${error.message}`);
+          return;
       }
-    });
-
-    console.log('File uploaded successfully:', response.data);
-  } catch (error) {
-    console.error('Error uploading the file:', error);
-  }
+      if (stderr) {
+          console.error(`Curl stderr: ${stderr}`);
+          return;
+      }
+      console.log(`Curl stdout: ${stdout}`);
+  });
 };
 
 
@@ -57,6 +69,8 @@ const main = async () => {
     await zipBuildFolder();
     await uploadFile();
     await deployToNetlify();
+
+    // await generatepresignedURL();
 };
 
 main();

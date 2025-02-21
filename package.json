@@ -29,11 +29,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start",
+    "server": "node server/server.js",
     "build": "react-scripts build",
+    "build:home": "cross-env REACT_APP_BUILD_ROUTE=home npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && node deploy.js"
+    "deploy": "npm run build:home && node deploy.js"
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +55,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3"
   }
 }

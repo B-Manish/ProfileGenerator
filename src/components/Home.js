@@ -4,13 +4,16 @@ import "../App.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-function Home({ name, desc, briefdesc }) {
+function Home({ name, desc, briefdesc, preview }) {
   useGSAP(() => {
-    gsap.fromTo(
-      ".gg",
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 1 }
-    );
+    if (preview === false) {
+      gsap.fromTo(
+        ".gg",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 1 }
+      );
+    }
+
   }, []);
   return (
     <Box
@@ -36,8 +39,8 @@ function Home({ name, desc, briefdesc }) {
             fontSize: {
               xs: "35px",
               sm: "50px",
-              md: "65px",
-              lg: "80px",
+              md: preview ? "50px" : "65px",
+              lg: preview ? "65px" : "80px",
             },
           }}
         >
@@ -52,8 +55,8 @@ function Home({ name, desc, briefdesc }) {
             fontSize: {
               xs: "30px",
               sm: "45px",
-              md: "60px",
-              lg: "80px",
+              md: preview ? "50px" : "60px",
+              lg: preview ? "65px" : "80px",
             },
           }}
         >

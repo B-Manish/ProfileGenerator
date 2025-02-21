@@ -1,11 +1,10 @@
+import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Gg from "./components/Gg";
+import Template from "./components/Template";
 import Home from "./components/Home";
 import data from "./data.json";
-import Viewpreview from "./components/Viewpreview";
-import Gg from "./components/Gg";
-
-import Template from "./components/Template";
 
 const customTheme = createTheme({
   breakpoints: {
@@ -19,25 +18,42 @@ const customTheme = createTheme({
   },
 });
 
+
 function App() {
-  return (
-    <ThemeProvider theme={customTheme}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-             <Gg/>
-          }
-        />
-        <Route
-          path="/preview"
-          element={
-            <Viewpreview/>
-          }
-        />
-      </Routes>
-    </ThemeProvider>
-  );
+
+  const routeToBuild = process.env.REACT_APP_BUILD_ROUTE;
+
+  return <ThemeProvider theme={customTheme}>
+    <Routes>
+      {routeToBuild === "home" && <Route
+        path="/"
+        element={
+          <Template
+            preview={false}
+            mail={data?.mail}
+            page={
+              <Home
+                name={data?.name}
+                desc={data?.desc}
+                briefdesc={data?.briefdesc}
+                preview={true}
+              />
+            }
+          />
+        }
+      />}
+
+      {routeToBuild === "preview" && <Route
+        path="/"
+        element={
+          <Gg />
+        }
+      />}
+
+
+    </Routes>
+  </ThemeProvider>;
 }
+
 
 export default App;

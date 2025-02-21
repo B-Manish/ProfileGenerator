@@ -1,79 +1,69 @@
 {
-    "name": "Manish Batchu",
-    "desc": "I build things for the web",
-    "briefdesc": "I’m a software engineer specializing in building (and occasionally designing) exceptional digital experiences. Currently, I’m focused on building accessible, human-centered products at Upstatement.",
-    "mail": "batchumanish@gmail.com",
-    "aboutme": {
-        "aboutmedesc": [
-            "Hello! My name is Manish, and I'm a frontend developer that enjoys backend development and building code that requires logical issue solving.",
-            "While I enjoy creating smooth, user-friendly interfaces, I am most motivated by the difficulties of developing scalable, efficient backend solutions. I enjoy solving challenging coding issues and bridging the gap between the frontend and backend to develop unified, high-performance apps."
-        ],
-        "recenttechnologies": [
-            "React js",
-            "Cypress",
-            "AWS",
-            "Node.js",
-            "Python(LLMs)",
-            "Three.js"
-        ]
-    },
-    "built": [
-        {
-            "name": "Haylop ushdhs",
-            "desc": "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-            "technologies": [
-                "React",
-                "Express"
-            ],
-            "references": [
-                {
-                    "ref": "Github",
-                    "to": "/"
-                },
-                {
-                    "ref": "Github",
-                    "to": "/"
-                }
-            ]
-        },
-        {
-            "name": "Haylon Theme",
-            "desc": "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-            "technologies": [
-                "React",
-                "Express"
-            ],
-            "references": [
-                {
-                    "ref": "Github",
-                    "to": "/"
-                },
-                {
-                    "ref": "Github",
-                    "to": "/"
-                }
-            ]
-        }
+  "name": "name",
+  "desc": "I build things for the web",
+  "briefdesc": "I’m an engineer specializing in....",
+  "mail": "mail",
+  "aboutme": {
+    "aboutmedesc": [
+      "description1",
+      "description2"
     ],
-    "projects": [
+    "recenttechnologies": [
+      "React js",
+      "Cypress",
+      "AWS",
+      "Node.js",
+      "Python(LLMs)",
+      "Three.js"
+    ],
+    "profileimg": "placeholder"
+  },
+  "worked": [
+    {
+      "company": "GG company",
+      "role": "SE",
+      "time": "June 2023 - Present",
+      "worked": [
+        "Worked on docusaurus,react and played a major role in development of its heavy state based logic requirements."
+      ]
+    },
+    {
+      "company": "GG company",
+      "role": "Software Developer",
+      "time": "June 2023 - Present",
+      "worked": [
+        "sdsds sdsd s"
+      ]
+    }
+  ],
+  "built": [
+    {
+      "name": "Project Name",
+      "desc": "Project Description",
+      "technologies": [
+        "Techstack 1",
+        "Techstack2"
+      ],
+      "references": [
         {
-            "name": "Ecommerce website",
-            "desc": "Developed a e-commerce website using React, with state management handled via Context API and Redux. Integrated the FakeStore API for product data, implementing features like product listings and shopping cart functionality. This project enhanced my skills in building scalable React applications and managing dynamic state effectively.",
-            "technologies": [
-                "React",
-                "Fakestore API",
-                "Context API",
-                "MUI"
-            ]
+          "ref": "Github",
+          "to": "/"
         },
         {
-            "name": "Clone of cricbuzz",
-            "desc": "Made a clone of cricbuzz where an admin creates a matches and the user can monitor scores on the application.",
-            "technologies": [
-                "Angular",
-                ".NET",
-                "Swagger"
-            ]
+          "ref": "Github",
+          "to": "/"
         }
-    ]
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project",
+      "desc": "Description",
+      "technologies": [
+        "Tech1",
+        "Tech2"
+      ]
+    }
+  ]
 }
