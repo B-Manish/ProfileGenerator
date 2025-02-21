@@ -4,7 +4,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Gg from "./components/Gg";
 import Template from "./components/Template";
 import Home from "./components/Home";
-import { DataContext } from "./contexts/DataContext";
 import data from "./data.json";
 
 const customTheme = createTheme({
