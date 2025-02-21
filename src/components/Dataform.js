@@ -4,11 +4,24 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { DataContext } from "../contexts/DataContext";
 import CustomTextField from './CustomTextField';
+import axios from 'axios';
 
 const Dataform = () => {
     const { data, setData } = useContext(DataContext);
 
+    const updateJsonFile = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/update-json', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            console.log('JSON file updated successfully:', response.data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     // Handlers for "Profile Info" section
     const handleChange = (field, value) => {
@@ -622,6 +635,11 @@ const Dataform = () => {
                     Add New Project
                 </Button>
             </Box>
+
+            <Button variant="contained" onClick={updateJsonFile}>
+                SAVE
+            </Button>
+
         </Box>
     );
 };
