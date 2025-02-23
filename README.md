@@ -1,5 +1,5 @@
 ## Prerequisites
-Make sure node js is installed 
+Make sure node js is installed.
 Check if it is installed with the below command.
  ``` bash
 node --version
