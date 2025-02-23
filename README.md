@@ -5,7 +5,7 @@ Check if it is installed with the below command.
 node --version
  ```
 
-### Steps to run
+## Steps to run
 Go the root of the project
 
 Cretate a .env file and paste the below code in it 
