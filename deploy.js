@@ -21,7 +21,6 @@ const deleteObject = async () => {
 
 const checkifBuildisUploaded = async () => {
   const response = await axios.get(checkbuildurl);
-  console.log("response", response);
   if (response?.data?.exists === "true") {
     return true;
   }
@@ -53,12 +52,10 @@ const zipBuildFolder = async () => {
 
 const generatepresignedURL = async () => {
   try {
-    console.log("Generating presigned URL .......");
     const response = await axios.get(generatepresignedURLapi);
-    console.log("response", response);
     return response?.data?.presigned_url;
   } catch (error) {
-    console.error("Error fetching APIs:", error);
+    console.error("Error:", error);
   }
 };
 
@@ -68,14 +65,14 @@ const uploadFile = async () => {
 
   exec(curlCommand, (error, stdout, stderr) => {
     if (error) {
-      console.error(`Error executing curl: ${error.message}`);
+    //   console.error(`Error executing curl: ${error.message}`);
       return;
     }
     if (stderr) {
-      console.error(`Curl stderr: ${stderr}`);
+    //   console.error(`Curl stderr: ${stderr}`);
       return;
     }
-    console.log(`Curl stdout: ${stdout}`);
+    // console.log(`Curl stdout: ${stdout}`);
   });
 };
 
@@ -86,7 +83,7 @@ const deployToNetlify = async () => {
     const response = await axios.get(apiUrl2);
     console.log(response.data);
   } catch (error) {
-    console.error("Error fetching APIs:", error);
+    console.error("Error", error);
   }
 };
 
