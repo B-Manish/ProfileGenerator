@@ -5,7 +5,7 @@ node --version
  ```
 
 ## Steps to run
-1. Navigate to the root directory of the project.
+1. Clone the repository or download the zip and navigate to the root directory of the project.
 
 2. Create a .env file and add the following line to it:
  ``` bash
