@@ -11,7 +11,7 @@ node --version
  ``` bash
 REACT_APP_BUILD_ROUTE=preview
  ```
-Run the below commands: 
+Run the following commands: 
 
  ``` bash
  npm install
