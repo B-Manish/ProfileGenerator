@@ -8,7 +8,7 @@ node --version
 ## Steps to run
 Go the root of the project
 
-Cretate a .env file and paste the below code in it 
+Create a .env file and paste the below code in it 
  ``` bash
 REACT_APP_BUILD_ROUTE=preview
  ```
