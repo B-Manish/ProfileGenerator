@@ -1,14 +1,13 @@
 ## Prerequisites
-Make sure node js is installed.
-Check if it is installed with the below command.
+Ensure that Node.js is installed on your system. You can verify this by running the following command:
  ``` bash
 node --version
  ```
 
 ## Steps to run
-Go the root of the project
+1. Navigate to the root directory of the project.
 
-Create a .env file and paste the below code in it 
+2. Create a .env file and add the following line to it:
  ``` bash
 REACT_APP_BUILD_ROUTE=preview
  ```
@@ -22,8 +21,9 @@ Run the below commands:
  npm run start 
  ```
 
-Fill in the details and click save at the bottom.
+3. Fill in the required details in the app and click "SAVE" button at the bottom.
 
+4. To generate a Netlify URL, run:
   ``` bash
  npm run deploy 
  ```
