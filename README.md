@@ -1,3 +1,10 @@
+##Prerequisites
+Make sure node js is installed 
+Check if it is installed with the below command.
+ ``` bash
+node --version
+ ```
+
 ### Steps to run
 Go the root of the project
 
@@ -12,11 +19,11 @@ Run the below commands:
  ```
 
   ``` bash
- npm run start # to start application and server
+ npm run start 
  ```
 
 Fill in the details and click save at the bottom.
 
   ``` bash
- npm run deploy #to generate a netlify url
+ npm run deploy 
  ```
