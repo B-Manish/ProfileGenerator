@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Button, TextField, Box, Typography, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import RemoveIcon from '@mui/icons-material/Delete';
 import { DataContext } from "../contexts/DataContext";
 import CustomTextField from './CustomTextField';
 import axios from 'axios';
+import MyButton from './MyButton';
+import "../App.css";
 
 const Dataform = () => {
     const { data, setData } = useContext(DataContext);
@@ -357,13 +359,13 @@ const Dataform = () => {
 
     return (
         <Box sx={{ padding: 2, color: 'white' }}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom sx={{fontFamily: '"Roboto Mono", monospace' }}>
                 Edit Profile
             </Typography>
 
             {/* Profile Info Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Profile Info</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>Profile Info</Typography>
                 <CustomTextField
                     fullWidth
                     label="Name"
@@ -395,7 +397,7 @@ const Dataform = () => {
 
             {/* About Me Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">About Me</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>About Me</Typography>
                 {data.aboutme.aboutmedesc.map((desc, index) => (
                     <Box
                         key={index}
@@ -408,19 +410,20 @@ const Dataform = () => {
                             onChange={(e) => handleAboutMeChange(index, e.target.value)}
                             sx={{ marginRight: 2 }}
                         />
-                        <IconButton onClick={handleAddAboutMe}>
-                            <AddIcon />
-                        </IconButton>
+                        
                         <IconButton onClick={() => handleRemoveAboutMe(index)}>
-                            <RemoveIcon />
+                            <RemoveIcon  style={{color:'red'}}/>
                         </IconButton>
                     </Box>
                 ))}
+                <IconButton onClick={handleAddAboutMe}>
+                    <AddIcon/>
+                </IconButton>
             </Box>
 
             {/* Recent Technologies Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Recent Technologies</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>Recent Technologies</Typography>
                 {data.aboutme.recenttechnologies.map((tech, index) => (
                     <Box
                         key={index}
@@ -433,14 +436,14 @@ const Dataform = () => {
                             onChange={(e) => handleTechChange(index, e.target.value)}
                             sx={{ marginRight: 2 }}
                         />
-                        <IconButton onClick={handleAddTech}>
-                            <AddIcon style={{color:'grey'}}/>
-                        </IconButton>
                         <IconButton onClick={() => handleRemoveTech(index)}>
-                            <RemoveIcon style={{color:'grey'}}/>
+                            <RemoveIcon style={{color:'red'}}/>
                         </IconButton>
                     </Box>
                 ))}
+                        <IconButton onClick={handleAddTech}>
+                            <AddIcon style={{color:'grey'}}/>
+                        </IconButton>
             </Box>
 
 
@@ -452,9 +455,9 @@ const Dataform = () => {
 
             {/* Worked Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Worked</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>Worked</Typography>
                 {data?.worked?.map((company, projectIndex) => (
-                    <Box key={projectIndex} sx={{ marginBottom: 2 }}>
+                    <Box key={projectIndex} sx={{ marginBottom: 2,border:'1px solid grey',padding:'10px' }}>
                         <CustomTextField
                             fullWidth
                             label="Company Name"
@@ -487,26 +490,20 @@ const Dataform = () => {
                                     sx={{ marginRight: 2 }}
                                 />
                                 <IconButton onClick={() => handleWorkedFromWork(projectIndex, techIndex)}>
-                                    <RemoveIcon />
+                                    <RemoveIcon style={{color:'red'}}/>
                                 </IconButton>
                             </Box>
                         ))}
-                        <Button
-                            variant="outlined"
-                            startIcon={<AddIcon />}
-                            onClick={() => handleAddWorkedtoWorked(projectIndex)}
-                        >
-                            Add Work Experience
-                        </Button>
 
-                        <Button variant="contained" onClick={() => handleRemoveWorked(projectIndex)}>
-                            Remove Work Experience
-                        </Button>
+                        <MyButton  text="Add New Work" clickHandler={() => handleAddWorkedtoWorked(projectIndex)}/>
+
+                        <MyButton text="Remove Work Experience" clickHandler={() => handleRemoveWorked(projectIndex)}/>
+
                     </Box>
                 ))}
-                <Button variant="contained" onClick={handleAddWorked}>
-                    Add New Work Experience
-                </Button>
+
+                <MyButton big text="Add New Work Experience" clickHandler={handleAddWorked}/>
+
             </Box>
 
 
@@ -519,9 +516,9 @@ const Dataform = () => {
 
             {/* Some things i have built Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Built</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>Built</Typography>
                 {data?.built?.map((project, projectIndex) => (
-                    <Box key={projectIndex} sx={{ marginBottom: 2 }}>
+                    <Box key={projectIndex} sx={{ marginBottom: 2 ,border:'1px solid grey'}}>
                         <CustomTextField
                             fullWidth
                             label="Project Name"
@@ -538,7 +535,7 @@ const Dataform = () => {
                         />
 
                         {/* Technologies in the project */}
-                        <Typography variant="subtitle1">Technologies</Typography>
+                        <Typography variant="subtitle1" sx={{fontFamily: '"Roboto Mono", monospace' }}>Technologies</Typography>
                         {project.technologies.map((tech, techIndex) => (
                             <Box key={techIndex} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
                                 <CustomTextField
@@ -549,26 +546,18 @@ const Dataform = () => {
                                     sx={{ marginRight: 2 }}
                                 />
                                 <IconButton onClick={() => handleRemoveTechFromBuiltProject(projectIndex, techIndex)}>
-                                    <RemoveIcon />
+                                    <RemoveIcon style={{color:'red'}}/>
                                 </IconButton>
                             </Box>
                         ))}
-                        <Button
-                            variant="outlined"
-                            startIcon={<AddIcon />}
-                            onClick={() => handleAddTechToBuiltProject(projectIndex)}
-                        >
-                            Add Technology
-                        </Button>
 
-                        <Button variant="contained" onClick={() => handleRemoveBuiltProject(projectIndex)}>
-                            Remove New Built Project
-                        </Button>
+                        <MyButton  text="Add New Technology" clickHandler={() => handleAddTechToBuiltProject(projectIndex)}/>
+                        <MyButton  text="Remove New Built Project" clickHandler={() => handleRemoveBuiltProject(projectIndex)}/>
+
                     </Box>
                 ))}
-                <Button variant="contained" onClick={handleAddBuiltProject}>
-                    Add New Built Project
-                </Button>
+                <MyButton big text="Add New Built Project" clickHandler={handleAddBuiltProject}/>
+
             </Box>
 
 
@@ -588,9 +577,9 @@ const Dataform = () => {
 
             {/* Projects Section */}
             <Box sx={{ marginBottom: 4 }}>
-                <Typography variant="h6">Other Projects</Typography>
+                <Typography variant="h6" sx={{fontFamily: '"Roboto Mono", monospace' }}>Other Projects</Typography>
                 {data.projects.map((project, projectIndex) => (
-                    <Box key={projectIndex} sx={{ marginBottom: 2 }}>
+                    <Box key={projectIndex} sx={{ marginBottom: 2 ,border:'1px solid grey'}}>
                         <CustomTextField
                             fullWidth
                             label="Project Name"
@@ -607,7 +596,7 @@ const Dataform = () => {
                         />
 
                         {/* Technologies in the project */}
-                        <Typography variant="subtitle1">Technologies</Typography>
+                        <Typography variant="subtitle1" sx={{fontFamily: '"Roboto Mono", monospace' }}>Technologies</Typography>
                         {project.technologies.map((tech, techIndex) => (
                             <Box key={techIndex} sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
                                 <CustomTextField
@@ -618,27 +607,25 @@ const Dataform = () => {
                                     sx={{ marginRight: 2 }}
                                 />
                                 <IconButton onClick={() => handleRemoveTechFromProject(projectIndex, techIndex)}>
-                                    <RemoveIcon />
+                                    <RemoveIcon style={{color:'red'}}/>
                                 </IconButton>
                             </Box>
                         ))}
-                        <Button
-                            variant="outlined"
-                            startIcon={<AddIcon />}
-                            onClick={() => handleAddTechToProject(projectIndex)}
-                        >
-                            Add Technology
-                        </Button>
+
+                        <MyButton text="Add Technology" clickHandler={() => handleAddTechToProject(projectIndex)}/>
+
+                        
+                        
                     </Box>
                 ))}
-                <Button variant="contained" onClick={handleAddProject}>
-                    Add New Project
-                </Button>
+
+                <MyButton big text="Add New Project" clickHandler={handleAddProject}/>
+
             </Box>
 
-            <Button variant="contained" onClick={updateJsonFile}>
-                SAVE
-            </Button>
+
+            <MyButton big text="SAVE" clickHandler={updateJsonFile}/>
+
 
         </Box>
     );
