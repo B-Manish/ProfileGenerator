@@ -434,10 +434,10 @@ const Dataform = () => {
                             sx={{ marginRight: 2 }}
                         />
                         <IconButton onClick={handleAddTech}>
-                            <AddIcon />
+                            <AddIcon style={{color:'grey'}}/>
                         </IconButton>
                         <IconButton onClick={() => handleRemoveTech(index)}>
-                            <RemoveIcon />
+                            <RemoveIcon style={{color:'grey'}}/>
                         </IconButton>
                     </Box>
                 ))}

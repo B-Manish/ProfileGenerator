@@ -28,13 +28,14 @@ const CustomTextField = ({
                 value={value}
                 {...props}
                 InputLabelProps={{
-                    style: { color: "#5BF2CE", fontFamily: "customdmsans !important" },
+                    style: { color: "#5BF2CE", fontFamily: '"Roboto Mono", monospace' ,fontSize:'20px'},
                 }}
                 InputProps={{
                     readOnly: !editable ? true : false,
                     sx: {
-                        fontFamily: "roboto !important", // Apply customdmsans to input text
-                        color: "#A7C3E5", // Custom input text color
+                        fontFamily: '"Roboto Mono", monospace' ,
+                        color: "#A7C3E5", // Custom input text color,
+                        fontSize:'12px'
                     },
                 }}
                 sx={{
