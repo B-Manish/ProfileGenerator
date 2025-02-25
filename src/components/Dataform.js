@@ -401,7 +401,7 @@ const Dataform = () => {
       </Box>
 
       {/* About Me Section */}
-      <Box sx={{ marginBottom: 4 }}>
+      <Box>
         <Typography
           variant="h6"
           sx={{ fontFamily: '"Roboto Mono", monospace' }}
@@ -426,9 +426,8 @@ const Dataform = () => {
             </IconButton>
           </Box>
         ))}
-        <IconButton onClick={handleAddAboutMe}>
-          <AddIcon />
-        </IconButton>
+
+        <MyButton text="Add New Description" clickHandler={handleAddAboutMe} />
       </Box>
 
       {/* Recent Technologies Section */}
@@ -456,9 +455,9 @@ const Dataform = () => {
             </IconButton>
           </Box>
         ))}
-        <IconButton onClick={handleAddTech}>
-          <AddIcon style={{ color: "grey" }} />
-        </IconButton>
+
+        <MyButton text="Add New Technology" clickHandler={handleAddTech} />
+
       </Box>
 
       {/* Worked Section */}
@@ -705,6 +704,7 @@ const Dataform = () => {
               text="Add Technology"
               clickHandler={() => handleAddTechToProject(projectIndex)}
             />
+             <MyButton big text="Remove Project" clickHandler={()=>handleRemoveProject(projectIndex)} />
           </Box>
         ))}
 
