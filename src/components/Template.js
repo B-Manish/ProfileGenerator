@@ -15,9 +15,9 @@ import OtherProjects from "./OtherProjects";
 import Preloader from "./Preloader";
 import Worked from "./Worked";
 import { DataContext } from "../contexts/DataContext";
+import jsonData from "../data.json";
 
-
-function Template({ page, mail,preview=false }) {
+function Template({ page, mail, preview = false }) {
   const { data } = React.useContext(DataContext);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showBM, setShowBM] = useState(false); // State to control 'BM' visibility
@@ -29,7 +29,7 @@ function Template({ page, mail,preview=false }) {
   const isMdScreen = useMediaQuery("(max-width:899px)");
   const isSxScreen = useMediaQuery("(max-width:599px)");
 
-  return (!isLoaded && !preview) ? (
+  return !isLoaded && !preview ? (
     <Preloader
       showBM={showBM}
       setShowBM={setShowBM}
@@ -52,7 +52,7 @@ function Template({ page, mail,preview=false }) {
       />
 
       <Grid item xs={1}>
-        {!isMdScreen && !preview &&(
+        {!isMdScreen && !preview && (
           <>
             <Box
               sx={{
@@ -100,7 +100,7 @@ function Template({ page, mail,preview=false }) {
         </Box>
       </Grid>
       <Grid item xs={1}>
-        {!isMdScreen && !preview &&(
+        {!isMdScreen && !preview && (
           <>
             <Box
               sx={{
@@ -130,11 +130,15 @@ function Template({ page, mail,preview=false }) {
           </>
         )}
       </Grid>
-      <Aboutme setAboutRef={setAboutRef} data={data?.aboutme} preview={preview}/>
-      <Worked setExpRef={setExpRef} preview={preview} data={data?.worked}/>
-      <Built setBuiltRef={setBuiltRef} data={data?.built} preview={preview}/>
-      <OtherProjects data={data?.projects} preview={preview}/>
-      <Getintouch setContactRef={setContactRef} name={data?.name}/>
+      <Aboutme
+        setAboutRef={setAboutRef}
+        data={preview === false ? jsonData?.aboutme : data?.aboutme}
+        preview={preview}
+      />
+      <Worked setExpRef={setExpRef} preview={preview} data={preview === false ? jsonData?.worked :data?.worked} />
+      <Built setBuiltRef={setBuiltRef} data={preview === false ? jsonData?.built :data?.built} preview={preview} />
+      <OtherProjects data={preview === false ? jsonData?.projects :data?.projects} preview={preview} />
+      <Getintouch setContactRef={setContactRef} name={preview === false ? jsonData?.name :data?.name} />
       {/* <Threed /> */}
     </Grid>
   );
